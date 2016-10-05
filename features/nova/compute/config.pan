@@ -13,6 +13,14 @@ include 'features/accounts/config';
 # Include RPMS for nova hypervisor configuration
 include 'features/nova/compute/rpms/config';
 
+# Include policy.json file
+include {
+  if (OS_NOVA_OVERWRITE_DEFAULT_POLICY) {
+    'features/nova/compute/policy';
+  } else {
+    null;
+  };
+};
 
 # Restart nova specific daemon
 include 'components/chkconfig/config';
